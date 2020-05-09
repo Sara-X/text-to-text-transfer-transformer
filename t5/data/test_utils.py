@@ -330,9 +330,9 @@ def _split_tsv_preprocessor(dataset, field_names=("prefix", "suffix")):
   return dataset.map(parse_line)
 
 
-def test_token_preprocessor(dataset, output_features, **unused_kwargs):
+def test_token_preprocessor(dataset, vocabulary, **unused_kwargs):
   """Change all occurrences of non-zero even numbered tokens in inputs to 50."""
-  del output_features
+  del vocabulary
 
   def my_fn(ex):
     inputs = ex["inputs"]
