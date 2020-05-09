@@ -45,12 +45,12 @@ class MeshDatasetFnsTest(test_utils.FakeMixtureTest):
     else:
       dataset_fn = mesh_transformer.mesh_eval_dataset_fn
       split = tfds.Split.VALIDATION
-    vocabulary = t5.data.MixtureRegistry.get(mixture_name).get_vocabulary()
+    spm = t5.data.MixtureRegistry.get(mixture_name).sentencepiece_model_path
     sequence_length = {"inputs": 13, "targets": 13}
     output = dataset_fn(
         mixture_name,
         sequence_length=sequence_length,
-        vocabulary=vocabulary,
+        vocabulary=t5.data.SentencePieceVocabulary(spm),
         dataset_split=split,
         use_cached=use_cached)
     if train:
